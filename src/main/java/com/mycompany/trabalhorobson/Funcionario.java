@@ -7,13 +7,14 @@ public class Funcionario {
   private double salario;
 
   public Funcionario(String cod, String cargo, String nome, String salario) {
-    this.cod = Integer.parseInt(cod);
+    String codclean = cod.replaceAll("\\D","");
+    this.cod = Integer.parseInt(codclean);
     this.cargo = cargo;
     this.nome = nome.replace("-", " ");
     this.salario = Double.parseDouble(salario);
   }
 
-  public int getCod() {
+  public double getCod() {
     return cod;
   }
 
@@ -56,7 +57,7 @@ public class Funcionario {
 
   public String linhaDados(){
     String nomeHifen = this.nome.replace(" ","-");
-    return ((this.cod)+" "+nomeHifen+" "+this.cargo+" "+this.salario+"\n");
+    return ((this.cod)+" "+this.cargo+" "+nomeHifen+" "+this.salario+"\n");
   }
 }
 

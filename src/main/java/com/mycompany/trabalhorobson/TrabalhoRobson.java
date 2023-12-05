@@ -4,8 +4,7 @@
 
 package com.mycompany.trabalhorobson;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -17,14 +16,18 @@ public class TrabalhoRobson {
     public static final Logger logger = Logger.getLogger(TrabalhoRobson.class.getName());
 
     public static void main(String[] args) throws IOException {
-        Funcionario[] funcionarios = leArquivo("caminho", 300);
-        //mostraListaFunc(funcionarios);
+        //caminho do arquivo txt para coleta
+        String file = "caminho_aqui";
 
-        FileWriter fw = new FileWriter("caminho");
-        for (int i = 0; i < funcionarios.length; i++) {
-            fw.write(funcionarios[i].linhaDados());
-        }
-        fw.close();
+        //Cria um conjunto de classes funcionario para guardar as informações do arquivo txt
+        Funcionario[] funcionarios = leArquivo(file, 300);
+
+        //Mostra a lista de funcionário
+        mostraListaFunc(funcionarios);
+
+        //atualiza arquivo txt, caso haja alguma alteração
+        atulizarArquivo(file,funcionarios);
+
     }
 
     public static Funcionario[] leArquivo(String caminhoParaArquivo, int quantidadeDeFuncionarios) {
@@ -55,5 +58,13 @@ public class TrabalhoRobson {
         for (int i = 0; i < funcionarios.length; i++) {
             funcionarios[i].mostrarDados();
         }
+    }
+
+    public static void atulizarArquivo(String caminho, Funcionario[] funcionarios) throws IOException {
+        FileWriter fw = new FileWriter(caminho);
+        for (int i = 0; i < funcionarios.length; i++) {
+            fw.write(funcionarios[i].linhaDados());
+        }
+        fw.close();
     }
 }
