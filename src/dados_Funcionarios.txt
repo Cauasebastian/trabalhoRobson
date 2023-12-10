@@ -1,4 +1,4 @@
-1 07 Maria-da-Silva 5000.0
+0 1 07 0.0
 2 12 José-de-Oliveira 3500.0
 3 03 Ana-do-Nascimento 4500.0
 4 15 Carlos-de-Souza 4000.0

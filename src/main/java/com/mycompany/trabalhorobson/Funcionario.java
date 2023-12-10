@@ -6,15 +6,35 @@ public class Funcionario {
   private String nome;
   private double salario;
 
-  public Funcionario(String cod, String cargo, String nome, String salario) {
-    String codclean = cod.replaceAll("\\D","");
-    this.cod = Integer.parseInt(codclean);
+  public Funcionario(String cod, String cargo, String nome, String salario) throws NumberFormatException {
+    try {
+      if (!cod.isEmpty() && !salario.isEmpty()) {
+        String codclean = cod.replaceAll("\\D", "");
+        this.cod = Integer.parseInt(codclean);
+        this.salario = Double.parseDouble(salario);
+      } else {
+        throw new NumberFormatException("Código ou Salário vazios");
+      }
+    } catch (NumberFormatException e) {
+      // Você pode tratar a exceção aqui ou lançá-la para ser tratada onde o Funcionario é criado
+      throw e;
+    }
+
     this.cargo = cargo;
     this.nome = nome.replace("-", " ");
-    this.salario = Double.parseDouble(salario);
+
+  }
+  @Override
+  public String toString() {
+    return "| Codigo: " + this.getCod() +
+            "\n| Nome: " + this.getNome() +
+            "\n| Cargo: " + this.getCargo() +
+            "\n| Salario: " + this.getSalario() +
+            "\n| -----------------------------------" +
+            "\n|";
   }
 
-  public double getCod() {
+  public int getCod() {
     return cod;
   }
 
@@ -55,9 +75,8 @@ public class Funcionario {
     System.out.println("|");
   }
 
-  public String linhaDados(){
-    String nomeHifen = this.nome.replace(" ","-");
-    return ((this.cod)+" "+this.cargo+" "+nomeHifen+" "+this.salario+"\n");
+  public String linhaDados() {
+    String nomeHifen = this.nome.replace(" ", "-");
+    return ((this.cod) + " " + this.cargo + " " + nomeHifen + " " + this.salario + "\n");
   }
 }
-
