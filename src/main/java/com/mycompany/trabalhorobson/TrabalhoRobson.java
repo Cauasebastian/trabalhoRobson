@@ -8,7 +8,7 @@ public class TrabalhoRobson {
     public static final Logger logger = Logger.getLogger(TrabalhoRobson.class.getName());
 
     public static void main(String[] args) throws IOException {
-        String file = "C:\\Users\\cauas\\Documents\\GitHub\\trabalhoRobson\\src\\dados_Funcionarios.txt";
+        String file = "caminho do arquivo txt";
 
         Scanner scanner = new Scanner(System.in);
         int escolha = 0;
