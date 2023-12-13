@@ -8,18 +8,17 @@ public class TrabalhoRobson {
     public static final Logger logger = Logger.getLogger(TrabalhoRobson.class.getName());
 
     public static void main(String[] args) throws IOException {
-        String file = "caminho do arquivo txt";
+        String file = "C:\\\\Users\\\\cauas\\\\Documents\\\\GitHub\\\\trabalhoRobson\\\\src\\\\dados_Funcionarios.txt";
 
         Scanner scanner = new Scanner(System.in);
         int escolha = 0;
 
-        while (escolha != 5) {
+        while (escolha != 4) {
             System.out.println("Selecione uma opção:");
             System.out.println("1. Ler arquivo");
-            System.out.println("2. Ordenar por matrícula usando Counting Sort");
-            System.out.println("3. Ordenar por nome usando Counting Sort");
-            System.out.println("4. Salvar arquivo");
-            System.out.println("5. Sair");
+            System.out.println("2. Ordenar utilizando Counting Sort");
+            System.out.println("3. Salvar arquivo");
+            System.out.println("4. Sair");
             escolha = scanner.nextInt();
 
             switch (escolha) {
@@ -29,35 +28,54 @@ public class TrabalhoRobson {
                     mostraListaFunc(funcionarios);
                     break;
 
-                case 2: // Ordenar por matrícula usando Counting Sort
-                    Funcionario[] funcionariosMatricula = leArquivo(file, 300);
-                    System.out.println("\nDados antes da ordenação por matrícula:");
-                    mostraListaFunc(funcionariosMatricula);
+                case 2: // Ordenar utilizando Counting Sort
+                    int subEscolha = 0;
+                    while (subEscolha != 3) {
+                        System.out.println("\nOrdenar utilizando Counting Sort por:");
+                        System.out.println("1. Matrícula");
+                        System.out.println("2. Nome");
+                        System.out.println("3. Voltar");
 
-                    CountingSort.countingSortByMatricula(funcionariosMatricula);
+                        subEscolha = scanner.nextInt();
+                        Funcionario[] funcionariosOrdenados = leArquivo(file, 300);
 
-                    System.out.println("\nDados após a ordenação por matrícula:");
-                    mostraListaFunc(funcionariosMatricula);
+                        switch (subEscolha) {
+                            case 1: // Ordenar por matrícula usando Counting Sort
+                                System.out.println("\nDados antes da ordenação por matrícula:");
+                                mostraListaFunc(funcionariosOrdenados);
+
+                                CountingSort.countingSortByMatricula(funcionariosOrdenados);
+
+                                System.out.println("\nDados após a ordenação por matrícula:");
+                                mostraListaFunc(funcionariosOrdenados);
+                                break;
+
+                            case 2: // Ordenar por nome usando Counting Sort
+                                System.out.println("\nDados antes da ordenação por nome:");
+                                mostraListaFunc(funcionariosOrdenados);
+
+                                CountingSort.countingSortByNome(funcionariosOrdenados);
+
+                                System.out.println("\nDados após a ordenação por nome:");
+                                mostraListaFunc(funcionariosOrdenados);
+                                break;
+
+                            case 3: // Voltar
+                                break;
+
+                            default:
+                                System.out.println("Opção inválida.");
+                        }
+                    }
                     break;
 
-                case 3: // Ordenar por nome usando Counting Sort
-                    Funcionario[] funcionariosNome = leArquivo(file, 300);
-                    System.out.println("\nDados antes da ordenação por nome:");
-                    mostraListaFunc(funcionariosNome);
-
-                    CountingSort.countingSortByNome(funcionariosNome);
-
-                    System.out.println("\nDados após a ordenação por nome:");
-                    mostraListaFunc(funcionariosNome);
-                    break;
-
-                case 4: // Salvar arquivo
+                case 3: // Salvar arquivo
                     Funcionario[] funcionariosParaSalvar = leArquivo(file, 300);
                     atulizarArquivo(file, funcionariosParaSalvar);
                     System.out.println("\nDados salvos no arquivo.");
                     break;
 
-                case 5: // Sair
+                case 4: // Sair
                     System.out.println("Saindo do programa.");
                     break;
 
@@ -66,7 +84,6 @@ public class TrabalhoRobson {
             }
         }
     }
-
     public static Funcionario[] leArquivo(String caminhoParaArquivo, int quantidadeDeFuncionarios)
             throws IOException, NumberFormatException {
         Funcionario[] funcionarios = new Funcionario[quantidadeDeFuncionarios];
